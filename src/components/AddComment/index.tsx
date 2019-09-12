@@ -26,9 +26,9 @@ const AddComment = ({ postId }: any) => {
           placeholder="What is the news?"
           className="form-control"
           onChange={ev => setBody(ev.target.value)}
-          rows={3}
+          rows={2}
         ></textarea>
-        <button className="btn btn-primary">Comment</button>
+        <style.Button className="btn btn-primary">Comment</style.Button>
       </form>
     </div>
   );

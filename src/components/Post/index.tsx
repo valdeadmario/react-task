@@ -1,5 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import { FaTrash, FaEdit, FaComment } from "react-icons/fa";
 
 import { deletePost } from "../../containers/Posts/actions";
 
@@ -20,13 +22,24 @@ const Post = ({ data, setEditingPost }: Props) => {
   };
 
   return (
-    <div className="card">
-      <p>{title}</p>
+    <style.Card className="card">
+      <style.Title>{title}</style.Title>
       <div className="card-body">{body}</div>
-      <button>Open</button>
-      <button onClick={() => setEditingPost(data)}>Update</button>
-      <button onClick={handleDelete}>Delete</button>
-    </div>
+      <style.Buttons>
+        <Link className="text-info" to={`/${id}`}>
+          <FaComment />
+        </Link>
+        <style.Button
+          className="text-success"
+          onClick={() => setEditingPost(data)}
+        >
+          <FaEdit />
+        </style.Button>
+        <style.Button className="text-danger" onClick={handleDelete}>
+          <FaTrash />
+        </style.Button>
+      </style.Buttons>
+    </style.Card>
   );
 };
 

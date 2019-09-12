@@ -32,12 +32,15 @@ const AddPost = ({ editingPost, setEditingPost }: Props) => {
 
   return (
     <style.Container>
-      <form onSubmit={handleAddPost}>
-        <input
+      <style.Form onSubmit={handleAddPost}>
+        <style.Input
+          className="form-control"
           name="title"
           value={title}
           placeholder="What is your title?"
-          onChange={ev => setTitle(ev.target.value)}
+          onChange={(ev: React.ChangeEvent<HTMLInputElement>) =>
+            setTitle(ev.target.value)
+          }
         />
         <textarea
           value={body}
@@ -46,8 +49,8 @@ const AddPost = ({ editingPost, setEditingPost }: Props) => {
           onChange={ev => setBody(ev.target.value)}
           rows={3}
         ></textarea>
-        <button className="btn btn-primary">Post</button>
-      </form>
+        <style.Button className="btn btn-primary">Post</style.Button>
+      </style.Form>
     </style.Container>
   );
 };

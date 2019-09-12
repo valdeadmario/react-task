@@ -7,3 +7,7 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
 `;
+
+export const Button = styled.button`
+  margin-top: 5px;
+`;

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Route } from "react-router";
+import { FaTimes } from "react-icons/fa";
 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -11,7 +12,7 @@ import SpecificPost from "../../containers/SpecificPost";
 
 import * as style from "./style";
 import * as modalStyle from "../SpecificPost/style";
-import { loadPosts } from "./actions";
+import { loadPosts, deletePost } from "./actions";
 
 const Posts = () => {
   const dispatch = useDispatch();
@@ -22,7 +23,7 @@ const Posts = () => {
     dispatch(loadPosts());
   }, [dispatch]);
 
-  const handleUpdate = () => {};
+  const onClose = () => setEditingPost({});
 
   return (
     <style.PostContainer>
@@ -40,7 +41,9 @@ const Posts = () => {
       {Object.entries(editingPost).length !== 0 && (
         <modalStyle.Modal>
           <modalStyle.Container>
-            <modalStyle.Close>close</modalStyle.Close>
+            <modalStyle.Close onClick={onClose}>
+              <FaTimes />
+            </modalStyle.Close>
             <AddPost
               editingPost={editingPost}
               setEditingPost={setEditingPost}

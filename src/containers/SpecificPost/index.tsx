@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { FaTimes } from "react-icons/fa";
 
 import { RootState } from "../../store/types";
 import { deletePost } from "../Posts/actions";
@@ -13,15 +14,11 @@ import * as style from "./style";
 
 const SpecificPost = withRouter(({ history, match }) => {
   const dispatch = useDispatch();
-  console.log(match.params.postId);
   const { post, isLoading } = useSelector(
     (state: RootState) => state.specificPost
   );
-  console.log(post);
   useEffect(() => {
-    console.log("assda");
     if (match.params.postId) {
-      console.log("asdasd");
       dispatch(loadSpecificPost(match.params.postId));
     } else {
       history.push("/");
@@ -40,18 +37,19 @@ const SpecificPost = withRouter(({ history, match }) => {
   return (
     <style.Modal>
       <style.Container>
-        <style.Close onClick={onClose}>Close</style.Close>
-        {console.log(post)}
+        <style.Close onClick={onClose}>
+          <FaTimes />
+        </style.Close>
         {post && (
           <React.Fragment>
-            <h5 className="modal-title">{post.title}</h5>
-
-            <span>#{post.id}</span>
+            <style.Title className="modal-title">{post.title}</style.Title>
 
             <div className="modal-body">
-              <p>{post.body}</p>
-              <button onClick={onDelete}>delete</button>
-              <div>
+              <style.Body>{post.body}</style.Body>
+              <button onClick={onDelete} className="btn btn-danger">
+                Delete
+              </button>
+              <style.Comments>
                 <h3>Comments</h3>
 
                 <AddComment postId={match.params.postId} />
@@ -61,7 +59,7 @@ const SpecificPost = withRouter(({ history, match }) => {
                   post.comments.map((comment: any) => (
                     <Comment item={comment} key={`comment-${comment.id}`} />
                   ))}
-              </div>
+              </style.Comments>
             </div>
           </React.Fragment>
         )}
