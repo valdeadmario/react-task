@@ -23,7 +23,7 @@ const Posts = () => {
     dispatch(loadPosts());
   }, [dispatch]);
 
-  const onClose = () => setEditingPost({});
+  const handleClose = () => setEditingPost({});
 
   if (isLoading) {
     return <Spinner />;
@@ -45,7 +45,7 @@ const Posts = () => {
       {Object.entries(editingPost).length !== 0 && (
         <modalStyle.Modal>
           <modalStyle.Container>
-            <modalStyle.Close onClick={onClose}>
+            <modalStyle.Close onClick={handleClose}>
               <FaTimes />
             </modalStyle.Close>
             <AddPost

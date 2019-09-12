@@ -27,19 +27,19 @@ const SpecificPost = withRouter(({ history, match }) => {
     }
   }, [dispatch, history, match.params.postId]);
 
-  const onClose = () => history.push("/");
+  const handleClose = () => history.push("/");
 
-  const onDelete = () => {
+  const handleDelete = () => {
     if (post) {
       dispatch(deletePost(post.id));
-      onClose();
+      handleClose();
     }
   };
 
   return (
     <style.Modal>
       <style.Container>
-        <style.Close onClick={onClose}>
+        <style.Close onClick={handleClose}>
           <FaTimes />
         </style.Close>
         {isLoading && <Spinner />}
@@ -49,7 +49,7 @@ const SpecificPost = withRouter(({ history, match }) => {
 
             <div className="modal-body">
               <style.Body>{post.body}</style.Body>
-              <button onClick={onDelete} className="btn btn-danger">
+              <button onClick={handleDelete} className="btn btn-danger">
                 Delete
               </button>
               <style.Comments>
