@@ -8,15 +8,16 @@ import { RootState } from "../../store/types";
 
 import Post from "../../components/Post";
 import AddPost from "../../components/AddPost";
-import SpecificPost from "../../containers/SpecificPost";
+import Spinner from "../../components/Spinner";
+import SpecificPost from "../SpecificPost";
 
 import * as style from "./style";
 import * as modalStyle from "../SpecificPost/style";
-import { loadPosts, deletePost } from "./actions";
+import { loadPosts } from "./actions";
 
 const Posts = () => {
   const dispatch = useDispatch();
-  const posts = useSelector((state: RootState) => state.posts.items);
+  const { items, isLoading } = useSelector((state: RootState) => state.posts);
   const [editingPost, setEditingPost] = useState({});
 
   useEffect(() => {
@@ -25,11 +26,15 @@ const Posts = () => {
 
   const onClose = () => setEditingPost({});
 
+  if (isLoading) {
+    return <Spinner />;
+  }
+
   return (
     <style.PostContainer>
       <AddPost />
 
-      {posts.map((post: any) => (
+      {items.map((post: any) => (
         <Post
           data={post}
           key={`post-${post.id}`}

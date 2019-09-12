@@ -1,15 +1,14 @@
 import * as service from "../../helpers/webApiHelper";
+import { PostType } from "../../types/post.types";
 
 import {
-  CREATE_POST,
-  UPDATE_POST,
   SET_POSTS,
   SET_IS_LOADING,
   PostAction,
   AsyncPostAction
 } from "./actionTypes";
 
-const setPosts = (posts: any): PostAction => ({
+const setPosts = (posts: PostType[]): PostAction => ({
   type: SET_POSTS,
   payload: posts
 });
@@ -23,7 +22,7 @@ export const createPost = (
   title: string,
   body: string
 ): AsyncPostAction => async (dispatch, getState) => {
-  const newPost = await service.createPost({ title, body });
+  const newPost = await service.createPost( title, body );
 
   const { items } = getState().posts;
 
@@ -37,7 +36,7 @@ export const updatePost = (
   title: string,
   body: string
 ): AsyncPostAction => async (dispatch, getState) => {
-  const newPost = await service.updatePost(postId, { title, body });
+  const newPost = await service.updatePost(postId, title, body );
 
   const { items } = getState().posts;
   const updatedPosts = items.map((i: any) =>
@@ -50,10 +49,10 @@ export const deletePost = (postId: string): AsyncPostAction => async (
   dispatch,
   getState
 ) => {
-  const deletedPost = await service.deletePost(postId);
+  await service.deletePost(postId);
 
   const { items } = getState().posts;
-  const updatedPosts = items.filter((post: any) => post.id !== postId);
+  const updatedPosts = items.filter((post: PostType) => post.id !== postId);
 
   dispatch(setPosts(updatedPosts));
 };

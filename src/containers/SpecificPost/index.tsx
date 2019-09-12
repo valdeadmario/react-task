@@ -9,6 +9,7 @@ import { loadSpecificPost } from "./actions";
 
 import Comment from "../../components/Comment";
 import AddComment from "../../components/AddComment";
+import Spinner from "../../components/Spinner";
 
 import * as style from "./style";
 
@@ -40,7 +41,8 @@ const SpecificPost = withRouter(({ history, match }) => {
         <style.Close onClick={onClose}>
           <FaTimes />
         </style.Close>
-        {post && (
+        {isLoading && <Spinner />}
+        {!isLoading && post && (
           <React.Fragment>
             <style.Title className="modal-title">{post.title}</style.Title>
 

@@ -4,13 +4,20 @@ import {
   SpecificPostAction
 } from "./actionTypes";
 
+import { SpecificPostType } from "../../types/post.types";
+
 type State = {
-  post: any;
+  post: SpecificPostType;
   isLoading: boolean;
 };
 
 const initialState: State = {
-  post: [],
+  post: {
+    id: "",
+    body: "",
+    title: "",
+    comments: []
+  },
   isLoading: true
 };
 

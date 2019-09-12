@@ -4,12 +4,13 @@ import { Link } from "react-router-dom";
 import { FaTrash, FaEdit, FaComment } from "react-icons/fa";
 
 import { deletePost } from "../../containers/Posts/actions";
+import { PostType } from "../../types/post.types";
 
 import * as style from "./style";
 
 type Props = {
-  data: any;
-  setEditingPost: (post: object) => void;
+  data: PostType;
+  setEditingPost: (post: PostType | {}) => void;
 };
 
 const Post = ({ data, setEditingPost }: Props) => {
@@ -29,13 +30,10 @@ const Post = ({ data, setEditingPost }: Props) => {
         <Link className="text-info" to={`/${id}`}>
           <FaComment />
         </Link>
-        <style.Button
-          className="text-success"
-          onClick={() => setEditingPost(data)}
-        >
+        <style.Button onClick={() => setEditingPost(data)}>
           <FaEdit />
         </style.Button>
-        <style.Button className="text-danger" onClick={handleDelete}>
+        <style.Button onClick={handleDelete}>
           <FaTrash />
         </style.Button>
       </style.Buttons>

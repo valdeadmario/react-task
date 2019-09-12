@@ -5,11 +5,15 @@ import { createComment } from "../../containers/SpecificPost/actions";
 
 import * as style from "./style";
 
-const AddComment = ({ postId }: any) => {
+type Props = {
+  postId: string;
+};
+
+const AddComment = ({ postId }: Props) => {
   const [body, setBody] = useState("");
   const dispatch = useDispatch();
 
-  const handleAddPost = (e: any) => {
+  const handleAddPost = (e: React.FormEvent) => {
     e.preventDefault();
 
     if (body) {

@@ -1,4 +1,5 @@
 import { Thunky } from "../../store/types";
+import { PostType } from "../../types/post.types";
 
 export const SET_POSTS = "POST_ACTION:SET_POSTS";
 export const SET_IS_LOADING = "POST_ACTION:SET_IS_LOADING";
@@ -7,7 +8,7 @@ export const UPDATE_POST = "POST_ACTION:UPDATE_POST";
 
 type SetPosts = {
   type: typeof SET_POSTS;
-  payload: any | null;
+  payload: PostType[];
 };
 
 type CreatePost = {

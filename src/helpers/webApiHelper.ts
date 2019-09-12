@@ -14,7 +14,7 @@ export const getPost = async (postId: string) => {
   return response.json();
 };
 
-export const createPost = async ({ title, body }: any) => {
+export const createPost = async (title: string, body: string) => {
   const response = await fetch(SERVER_URL + `posts`, {
     method: "POST",
     headers: {
@@ -35,7 +35,7 @@ export const deletePost = async (postId: string) => {
   return response.json();
 };
 
-export const updatePost = async (postId: string, { title, body }: any) => {
+export const updatePost = async (postId: string,  title: string, body: string) => {
   const response = await fetch(SERVER_URL + `posts/${postId}`, {
     method: "PUT",
     headers: {

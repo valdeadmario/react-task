@@ -1,14 +1,16 @@
 import * as service from "../../helpers/webApiHelper";
+import { SpecificPostType } from "../../types/post.types";
 
 import {
-  CREATE_COMMENT,
   SET_SPECIFIC_POST,
   SET_IS_LOADING,
   SpecificPostAction,
   AsyncSpecificPostAction
 } from "./actionTypes";
 
-const setSpecificPost = (specificPost: any): SpecificPostAction => ({
+const setSpecificPost = (
+  specificPost: SpecificPostType
+): SpecificPostAction => ({
   type: SET_SPECIFIC_POST,
   payload: specificPost
 });
@@ -23,7 +25,7 @@ export const createComment = (
   body: string
 ): AsyncSpecificPostAction => async (dispatch, getState) => {
   const comment = await service.createComment(Number(postId), body);
-  console.log(comment);
+
   const { post } = getState().specificPost;
 
   const comments = [...post.comments, comment];
@@ -37,7 +39,7 @@ export const loadSpecificPost = (
   dispatch(setIsLoading(true));
 
   const posts = await service.getPost(postId);
-  console.log(posts);
+
   dispatch(setSpecificPost(posts));
   dispatch(setIsLoading(false));
 };

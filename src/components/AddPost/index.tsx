@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 
 import { createPost, updatePost } from "../../containers/Posts/actions";
+import { PostType } from "../../types/post.types";
 
 import * as style from "./style";
 
 type Props = {
   editingPost?: any;
-  setEditingPost?: (post: object) => void;
+  setEditingPost?: (post: PostType | {}) => void;
 };
 
 const AddPost = ({ editingPost, setEditingPost }: Props) => {
@@ -15,7 +16,7 @@ const AddPost = ({ editingPost, setEditingPost }: Props) => {
   const [body, setBody] = useState(editingPost ? editingPost.body : "");
   const dispatch = useDispatch();
 
-  const handleAddPost = (e: any) => {
+  const handleAddPost = (e: React.FormEvent) => {
     e.preventDefault();
 
     if (title && body) {

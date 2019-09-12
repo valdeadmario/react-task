@@ -1,4 +1,5 @@
 import { Thunky } from "../../store/types";
+import { SpecificPostType } from "../../types/post.types";
 
 export const SET_SPECIFIC_POST = "SPECIFIC_POST_ACTION:SET_SPECIFIC_POST";
 export const SET_IS_LOADING = "SPECIFIC_POST_ACTION:SET_IS_LOADING";
@@ -6,7 +7,7 @@ export const CREATE_COMMENT = "SPECIFIC_POST_ACTION:CREATE_COMMENT";
 
 type SetSpecificPost = {
   type: typeof SET_SPECIFIC_POST;
-  payload: any | null;
+  payload: SpecificPostType;
 };
 
 type CreateComment = {

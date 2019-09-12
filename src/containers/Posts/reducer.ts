@@ -1,14 +1,8 @@
-import {
-  CREATE_POST,
-  UPDATE_POST,
-  SET_POSTS,
-  SET_IS_LOADING,
-  PostAction,
-  AsyncPostAction
-} from "./actionTypes";
+import { SET_POSTS, SET_IS_LOADING, PostAction } from "./actionTypes";
+import { PostType } from "../../types/post.types";
 
 type State = {
-  items: any;
+  items: PostType[];
   isLoading: boolean;
 };
 
@@ -17,7 +11,7 @@ const initialState: State = {
   isLoading: true
 };
 
-const postsReducer = (state = initialState, action: any): State => {
+const postsReducer = (state = initialState, action: PostAction): State => {
   switch (action.type) {
     case SET_POSTS:
       return { ...state, items: action.payload };
