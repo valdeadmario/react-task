@@ -1,5 +1,3 @@
-import { async } from "q";
-
 const SERVER_URL = "http://bloggy-api.herokuapp.com/";
 
 export const getPosts = async () => {
