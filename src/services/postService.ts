@@ -35,7 +35,11 @@ export const deletePost = async (postId: string) => {
   return response.json();
 };
 
-export const updatePost = async (postId: string,  title: string, body: string) => {
+export const updatePost = async (
+  postId: string,
+  title: string,
+  body: string
+) => {
   const response = await fetch(SERVER_URL + `posts/${postId}`, {
     method: "PUT",
     headers: {

@@ -1,4 +1,4 @@
-import * as service from "../../helpers/webApiHelper";
+import * as service from "../../services/postService";
 import { PostType } from "../../types/post.types";
 
 import {
@@ -22,13 +22,17 @@ export const createPost = (
   title: string,
   body: string
 ): AsyncPostAction => async (dispatch, getState) => {
-  const newPost = await service.createPost( title, body );
+  try {
+    const newPost = await service.createPost(title, body);
 
-  const { items } = getState().posts;
+    const { items } = getState().posts;
 
-  const updatedPosts = [...items, newPost];
+    const updatedPosts = [...items, newPost];
 
-  dispatch(setPosts(updatedPosts));
+    dispatch(setPosts(updatedPosts));
+  } catch (err) {
+    console.log("Something went wront...");
+  }
 };
 
 export const updatePost = (
@@ -36,32 +40,44 @@ export const updatePost = (
   title: string,
   body: string
 ): AsyncPostAction => async (dispatch, getState) => {
-  const newPost = await service.updatePost(postId, title, body );
+  try {
+    const newPost = await service.updatePost(postId, title, body);
 
-  const { items } = getState().posts;
-  const updatedPosts = items.map((i: any) =>
-    i.id === newPost.id ? newPost : i
-  );
-  dispatch(setPosts(updatedPosts));
+    const { items } = getState().posts;
+    const updatedPosts = items.map((i: any) =>
+      i.id === newPost.id ? newPost : i
+    );
+    dispatch(setPosts(updatedPosts));
+  } catch (err) {
+    console.log("Something went wront...");
+  }
 };
 
 export const deletePost = (postId: string): AsyncPostAction => async (
   dispatch,
   getState
 ) => {
-  await service.deletePost(postId);
+  try {
+    await service.deletePost(postId);
 
-  const { items } = getState().posts;
-  const updatedPosts = items.filter((post: PostType) => post.id !== postId);
+    const { items } = getState().posts;
+    const updatedPosts = items.filter((post: PostType) => post.id !== postId);
 
-  dispatch(setPosts(updatedPosts));
+    dispatch(setPosts(updatedPosts));
+  } catch (err) {
+    console.log("Something went wront...");
+  }
 };
 
 export const loadPosts = (): AsyncPostAction => async (dispatch, getRoot) => {
-  dispatch(setIsLoading(true));
+  try {
+    dispatch(setIsLoading(true));
 
-  const posts = await service.getPosts();
+    const posts = await service.getPosts();
 
-  dispatch(setPosts(posts));
-  dispatch(setIsLoading(false));
+    dispatch(setPosts(posts));
+    dispatch(setIsLoading(false));
+  } catch (err) {
+    console.log("Something went wront...");
+  }
 };

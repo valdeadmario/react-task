@@ -1,4 +1,4 @@
-import * as service from "../../helpers/webApiHelper";
+import * as service from "../../services/postService";
 import { SpecificPostType } from "../../types/post.types";
 
 import {
@@ -24,22 +24,30 @@ export const createComment = (
   postId: string,
   body: string
 ): AsyncSpecificPostAction => async (dispatch, getState) => {
-  const comment = await service.createComment(Number(postId), body);
+  try {
+    const comment = await service.createComment(Number(postId), body);
 
-  const { post } = getState().specificPost;
+    const { post } = getState().specificPost;
 
-  const comments = [...post.comments, comment];
+    const comments = [...post.comments, comment];
 
-  dispatch(setSpecificPost({ ...post, comments }));
+    dispatch(setSpecificPost({ ...post, comments }));
+  } catch (err) {
+    console.log("Something went wront...");
+  }
 };
 
 export const loadSpecificPost = (
   postId: string
 ): AsyncSpecificPostAction => async (dispatch, getRoot) => {
-  dispatch(setIsLoading(true));
+  try {
+    dispatch(setIsLoading(true));
 
-  const posts = await service.getPost(postId);
+    const posts = await service.getPost(postId);
 
-  dispatch(setSpecificPost(posts));
-  dispatch(setIsLoading(false));
+    dispatch(setSpecificPost(posts));
+    dispatch(setIsLoading(false));
+  } catch (err) {
+    console.log("Something went wront...");
+  }
 };
