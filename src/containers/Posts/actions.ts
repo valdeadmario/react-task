@@ -44,7 +44,7 @@ export const updatePost = (
     const newPost = await service.updatePost(postId, title, body);
 
     const { items } = getState().posts;
-    const updatedPosts = items.map((i: any) =>
+    const updatedPosts = items.map((i: PostType) =>
       i.id === newPost.id ? newPost : i
     );
     dispatch(setPosts(updatedPosts));

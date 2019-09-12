@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Route } from "react-router";
 import { FaTimes } from "react-icons/fa";
-
 import { useDispatch, useSelector } from "react-redux";
-
-import { RootState } from "../../store/types";
 
 import Post from "../../components/Post";
 import AddPost from "../../components/AddPost";
@@ -14,6 +11,8 @@ import SpecificPost from "../SpecificPost";
 import * as style from "./style";
 import * as modalStyle from "../SpecificPost/style";
 import { loadPosts } from "./actions";
+import { PostType } from "../../types/post.types";
+import { RootState } from "../../store/types";
 
 const Posts = () => {
   const dispatch = useDispatch();
@@ -34,7 +33,7 @@ const Posts = () => {
     <style.PostContainer>
       <AddPost />
 
-      {items.map((post: any) => (
+      {items.map((post: PostType) => (
         <Post
           data={post}
           key={`post-${post.id}`}

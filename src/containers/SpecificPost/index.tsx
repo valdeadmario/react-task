@@ -12,6 +12,7 @@ import AddComment from "../../components/AddComment";
 import Spinner from "../../components/Spinner";
 
 import * as style from "./style";
+import { CommentType } from "../../types/comment.types";
 
 const SpecificPost = withRouter(({ history, match }) => {
   const dispatch = useDispatch();
@@ -58,7 +59,7 @@ const SpecificPost = withRouter(({ history, match }) => {
 
                 {post.comments &&
                   post.comments.length > 0 &&
-                  post.comments.map((comment: any) => (
+                  post.comments.map((comment: CommentType) => (
                     <Comment item={comment} key={`comment-${comment.id}`} />
                   ))}
               </style.Comments>
